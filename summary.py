@@ -11,6 +11,7 @@ def get_summary(file):
     file_name = splitext(file)[0]
     date, month = file_name.split('-')
     year = date[-6:][:4]
+    
     print("Summary as of", month, year)
 
     # Group by Retailer and calculate total stream and earnings
