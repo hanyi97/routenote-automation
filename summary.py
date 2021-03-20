@@ -35,5 +35,5 @@ def get_summary(file):
 if __name__ == "__main__":
     path = "dataset"
     files = [join(path, f) for f in listdir(path)]
-    for file in files:
+    for file in sorted(files):
         get_summary(file)
