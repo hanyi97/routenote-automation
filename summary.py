@@ -3,6 +3,7 @@ import numpy as np
 
 from os import listdir
 from os.path import isfile, join, splitext
+from tabulate import tabulate
 
 def get_summary(file):
     df = pd.read_excel(file)
@@ -23,7 +24,12 @@ def get_summary(file):
     # Format output
     retailer.Earnings = retailer.Earnings.round(2)
     retailer.Streams = retailer.Streams.apply(lambda x : "{:,}".format(int(x)))
-    print(retailer, '\n')
+    print(tabulate(retailer, headers=['Retailer', 'Streams', 'Earnings']), '\n')
+
+    top_country = df.loc[df.groupby('Retailer')['Stream'].idxmax()]
+    df = pd.DataFrame({'Retailer':top_country['Retailer'], 'Country':top_country['Customer Territory'], 'Streams': top_country['Stream'].apply(lambda x : "{:,}".format(int(x)))})
+    print('Top Countries:')
+    print(tabulate(df, showindex=False, headers=df.columns), '\n\n\n')
 
 if __name__ == "__main__":
     path = "dataset"
