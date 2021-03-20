@@ -24,11 +24,12 @@ def get_summary(file):
     # Format output
     retailer.Earnings = retailer.Earnings.round(2)
     retailer.Streams = retailer.Streams.apply(lambda x : "{:,}".format(int(x)))
-    print(tabulate(retailer, headers=['Retailer', 'Streams', 'Earnings']), '\n')
+    print(tabulate(retailer, headers=['Retailer', 'Streams', 'Earnings(USD)']), '\n')
 
+    # Top Countries
     top_country = df.loc[df.groupby('Retailer')['Stream'].idxmax()]
     df = pd.DataFrame({'Retailer':top_country['Retailer'], 'Country':top_country['Customer Territory'], 'Streams': top_country['Stream'].apply(lambda x : "{:,}".format(int(x)))})
-    print('Top Countries:')
+    print('Top Countries for', month, year)
     print(tabulate(df, showindex=False, headers=df.columns), '\n\n\n')
 
 if __name__ == "__main__":
