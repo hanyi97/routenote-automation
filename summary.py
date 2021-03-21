@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import sys
 
 from os import listdir
 from os.path import isfile, join, splitext
@@ -33,7 +34,12 @@ def get_summary(file):
     print(tabulate(df, showindex=False, headers=df.columns), '\n\n\n')
 
 if __name__ == "__main__":
-    path = "dataset"
-    files = [join(path, f) for f in listdir(path)]
-    for file in sorted(files):
-        get_summary(file)
+    argc = len(sys.argv)
+    if argc == 1:
+        path = "dataset"
+        files = [join(path, f) for f in listdir(path)]
+        for file in sorted(files):
+            get_summary(file)
+    else:
+        for i in range(1, argc):
+            get_summary(sys.argv[i])
