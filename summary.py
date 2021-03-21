@@ -24,7 +24,7 @@ def print_summary(file):
     # Print top country table
     print('Top Countries for', month, year)
     top_country = get_top_country(df)
-    print(tabulate(top_country, showindex=False, headers=df.columns), '\n\n\n')
+    print(tabulate(top_country, showindex=False, headers=top_country.columns))
 
 def get_summary(df):
     # Group by Retailer and calculate total stream and earnings
@@ -54,6 +54,7 @@ if __name__ == "__main__":
         files = [join(path, f) for f in listdir(path)]
         for file in sorted(files):
             print_summary(file)
+            print('\n\n\n')
     else:
         for i in range(1, argc):
             print_summary(sys.argv[i])
