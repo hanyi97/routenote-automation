@@ -7,6 +7,8 @@ count = 0
 for f in os.listdir():
     # Split by name and ext
     file_name, file_ext = os.path.splitext(f)
+    if file_name[0:7] != "RNSales": continue
+    
     # File name by _
     company, date, name = file_name.split('_')
     # Get month and date
